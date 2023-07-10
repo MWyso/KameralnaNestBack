@@ -6,7 +6,8 @@ import { ThrottlerModule } from '@nestjs/throttler';
 import { CacheModule } from '@nestjs/cache-manager';
 import { ScheduleModule } from '@nestjs/schedule';
 import { DatabaseConfiguration } from './config/typeorm.config';
-import { AdminModule } from './admin/admin.module';
+import { AdminModule } from "./admin/admin.module";
+
 // import { AtGuard } from './common/guards';
 // import { CronService } from './cron/cron.service';
 
