@@ -4,6 +4,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { Injectable } from '@nestjs/common';
 import { configDb } from './config';
 import { Admin } from '../admin/entity/admin.entity';
+import { Users } from '../users/entity/users.entity';
 
 @Injectable()
 export class DatabaseConfiguration implements TypeOrmOptionsFactory {
@@ -16,7 +17,7 @@ export class DatabaseConfiguration implements TypeOrmOptionsFactory {
       username: configDb.dbUser,
       password: configDb.dbPassword,
       database: configDb.dbDatabase,
-      entities: [Admin],
+      entities: [Admin, Users],
       autoLoadEntities: true,
       bigNumberStrings: false,
       logging: true,

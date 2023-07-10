@@ -6,10 +6,11 @@ import { ThrottlerModule } from '@nestjs/throttler';
 import { CacheModule } from '@nestjs/cache-manager';
 import { ScheduleModule } from '@nestjs/schedule';
 import { DatabaseConfiguration } from './config/typeorm.config';
-import { AdminModule } from "./admin/admin.module";
+import { AdminModule } from './admin/admin.module';
 
 // import { AtGuard } from './common/guards';
 // import { CronService } from './cron/cron.service';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { AdminModule } from "./admin/admin.module";
       limit: 5,
     }),
     forwardRef(() => AdminModule),
+    forwardRef(() => UsersModule),
   ],
   // providers: [{ provide: APP_GUARD, useClass: AtGuard }, CronService],
 })
