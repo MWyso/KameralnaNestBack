@@ -11,6 +11,7 @@ import { AdminModule } from './admin/admin.module';
 // import { AtGuard } from './common/guards';
 // import { CronService } from './cron/cron.service';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { UsersModule } from './users/users.module';
     }),
     forwardRef(() => AdminModule),
     forwardRef(() => UsersModule),
+    forwardRef(() => AuthModule),
   ],
   // providers: [{ provide: APP_GUARD, useClass: AtGuard }, CronService],
 })
