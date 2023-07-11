@@ -9,10 +9,10 @@ import { JwtService } from '@nestjs/jwt';
 export class AuthService {
 
   constructor(
-    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    // @Inject(CACHE_MANAGER) private cacheManager: Cache,
     private adminService: AdminService,
     private usersService: UsersService,
-    private jwtService: JwtService,
+    // private jwtService: JwtService,
   ) {
   }
 
