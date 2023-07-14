@@ -9,7 +9,7 @@ import { AdminModule } from './admin/admin.module';
 // import { CronService } from './cron/cron.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import { CacheModule } from "@nestjs/common/cache";
+import { CacheModule } from '@nestjs/cache-manager';
 import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
