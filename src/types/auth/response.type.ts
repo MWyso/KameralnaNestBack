@@ -19,3 +19,7 @@ export type UsersDataResponse = {
 export type CheckUserResponse = Admin | Users | null;
 
 export type UserDataResponse = AdminDataResponse | UsersDataResponse;
+
+export type CreateResponse = {
+  id: string;
+};
