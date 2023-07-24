@@ -11,6 +11,9 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { CacheModule } from '@nestjs/cache-manager';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { MailService } from './mail/mail.service';
+import { MailController } from './mail/mail.controller';
+import { MailModule } from './mail/mail.module';
 
 @Module({
   imports: [
@@ -27,7 +30,10 @@ import { ThrottlerModule } from '@nestjs/throttler';
     forwardRef(() => AdminModule),
     forwardRef(() => UsersModule),
     forwardRef(() => AuthModule),
+    MailModule,
   ],
+  providers: [MailService],
+  controllers: [MailController],
   // providers: [{ provide: APP_GUARD, useClass: AtGuard }, CronService],
 })
 export class AppModule {}
