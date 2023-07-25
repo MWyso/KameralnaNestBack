@@ -8,7 +8,7 @@ export class AdminController {
 
   constructor(private usersService: UsersService) {}
   @Post('/user/create')
-  createHr(@Body() formData: UserDto): Promise<ApiResponse<CreateResponse>> {
+  createUser(@Body() formData: UserDto): Promise<ApiResponse<CreateResponse>> {
     return this.usersService.createUser(formData);
   }
 }
