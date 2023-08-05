@@ -27,4 +27,20 @@ export class MailService {
       html,
     });
   }
+
+  async sendEmailsToUsers(
+    mailService,
+    users,
+    subject: string,
+    emailTemplateFunction: (activationUrl: string) => string,
+  ): Promise<void> {
+    for (const user of users) {
+      const emailTemplate = emailTemplateFunction(user.activationUrl);
+      try {
+        await mailService.sendMail(user.email, subject, emailTemplate);
+      } catch (error) {
+        console.error(`Failed to send email to ${user.email}:`, error.message);
+      }
+    }
+  }
 }

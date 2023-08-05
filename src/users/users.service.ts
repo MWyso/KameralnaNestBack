@@ -2,13 +2,16 @@ import { forwardRef, HttpException, HttpStatus, Inject, Injectable } from "@nest
 import { Users } from './entity/users.entity';
 import { AuthService } from "../auth/auth.service";
 import { ApiResponse, CreateResponse, UserRole } from "@Types";
+import { MailService } from "../mail/mail.service";
+import { UserRegistrationTemplate } from "../templates/email/user-registration";
 
 @Injectable()
 export class UsersService {
 
   constructor(
-    @Inject(forwardRef(() => AuthService)) private authService: AuthService) {
-  }
+    @Inject(forwardRef(() => AuthService)) private authService: AuthService,
+  private mailService: MailService,
+  ) {}
 
   async getUserByEmail(email: string): Promise<Users> {
     return await Users.findOneBy({ email });
@@ -30,15 +33,15 @@ export class UsersService {
         await this.authService.generateEmailToken(user.id, user.email),
       );
       await user.save();
-      // user.activationUrl = await this.mailService.generateUrl(user, 'new-user');
-      // await user.save();
-      // this.mailService
-      //   .sendEmailsToUsers(this.mailService, [hr], 'Potwierdzenie rejestracji', (activationUrl) =>
-      //     UserRegistrationTemplate(activationUrl, UserRole.USER),
-      //   )
-      //   .catch((error) => {
-      //     console.error('Failed to send email to HR:', error.message);
-      //   });
+      user.activationUrl = await this.mailService.generateUrl(user, 'new-user');
+      await user.save();
+      this.mailService
+        .sendEmailsToUsers(this.mailService, [user], 'Potwierdzenie rejestracji', (activationUrl) =>
+          UserRegistrationTemplate(activationUrl, UserRole.USER),
+        )
+        .catch((error) => {
+          console.error('Failed to send email to HR:', error.message);
+        });
       return {
         isSuccess: true,
         payload: { id: user.id },
